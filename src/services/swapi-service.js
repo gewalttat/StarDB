@@ -1,4 +1,5 @@
-class SwapiService {
+
+export default class SwapiService {
     //указание источника данных для getResource
     _apiBase = 'https://swapi.co/api';
     //основная асинхронная функция, возвращающая промис возвращающий данные с swapi.co(?)
