@@ -4,16 +4,25 @@ export default class RandomPlanet extends Component {
 swapiService = new SwapiService();
 
     state = {
+      id : null,
     name : null,
     population : null,
     rotationPeriod : null,
     diameter : null
 };
+
+constructor(){
+  super();
+  this.updatePlanet();
+};
+
 updatePlanet = () => {
+  const id = Math.floor(Math.random()*25)+2;
     this.swapiService
-    .getPlanet(7)
+    .getPlanet(id)
     .then((planet) => {
       this.setState({
+        id,
 name : planet.name,
 population : planet.population,
 rotationPeriod : planet.rotationPeriod,
