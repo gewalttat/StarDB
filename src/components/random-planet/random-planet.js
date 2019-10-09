@@ -1,37 +1,30 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
+import './random-planet.css';
 export default class RandomPlanet extends Component {
-swapiService = new SwapiService();
 
-    state = {
-      id : null,
-    name : null,
-    population : null,
-    rotationPeriod : null,
-    diameter : null
-};
+  swapiService = new SwapiService();
+  state = {
+    planet: {}
+  };
 
-constructor(){
-  super();
-  this.updatePlanet();
-};
+  constructor() {
+    super();
+    this.updatePlanet();
+  }
 
-updatePlanet = () => {
-  const id = Math.floor(Math.random()*25)+2;
+  onPlanetLoaded = (planet) => {
+    this.setState({ planet });
+  };
+
+  updatePlanet() {
+    const id = 1;
     this.swapiService
-    .getPlanet(id)
-    .then((planet) => {
-      this.setState({
-        id,
-name : planet.name,
-population : planet.population,
-rotationPeriod : planet.rotationPeriod,
-diameter : planet.diameter
-      });
-    });
-}
+      .getPlanet(id)
+      .then(this.onPlanetLoaded);
+  }
 
-render() {
+  render() {
 
     const { planet: { id, name, population,
       rotationPeriod, diameter } } = this.state;
