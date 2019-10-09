@@ -4,8 +4,7 @@ export default class SwapiService {
     _apiBase = 'https://swapi.co/api';
     //основная асинхронная функция, возвращающая промис возвращающий данные с swapi.co(?)
     async getResource(url) {
-        //res = ответ сервера
-        const res = await fetch(`${this.apiBase}${url}`);
+        const res = await fetch(`${this._apiBase}${url}`);
         //бросает ошибку если нет респонса
         if (!res.ok) {
             throw new Error()
@@ -40,8 +39,3 @@ export default class SwapiService {
     return this.getResource(`/starships/${id}/`);
     };
 };
-//swapi получает функцию класса с промисом
-const swapi = new SwapiService();
-swapi.getPerson(3).then((p) => {
-    console.log(p.name);
-});
