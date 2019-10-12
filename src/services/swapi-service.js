@@ -1,4 +1,3 @@
-
 export default class SwapiService {
     //указание источника данных для getResource
     _apiBase = 'https://swapi.co/api';
