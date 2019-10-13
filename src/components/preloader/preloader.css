@@ -105,8 +105,8 @@
     animation-delay: 0s;
   }
   .lds-spinner {
-    width: 113px !important;
-    height: 113px !important;
-    -webkit-transform: translate(-56.5px, -56.5px) scale(0.565) translate(56.5px, 56.5px);
-    transform: translate(-56.5px, -56.5px) scale(0.565) translate(56.5px, 56.5px);
+    width: 48px !important;
+    height: 48px !important;
+    -webkit-transform: translate(-24px, -24px) scale(0.24) translate(24px, 24px);
+    transform: translate(-24px, -24px) scale(0.24) translate(24px, 24px);
   }
