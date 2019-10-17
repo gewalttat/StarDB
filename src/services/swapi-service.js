@@ -41,12 +41,14 @@ export default class SwapiService {
         const starship = this.getResource(`/starships/${id}/`);
         return this._transformStarship(starship);
       }
-    
+    //вычленение id из состава swapi
     _extractId(item) {
+      //регулярное выражение получающее id с адресной строки компонента
         const idRegExp = /\/([0-9]*)\/$/;
         return item.url.match(idRegExp)[1];
     };
-    
+    //получает компонент(планету) и выводит её составляющие
+    //далее то же самое
     _transformPlanet(planet) {
         return  { 
             id: this._extractId(planet),

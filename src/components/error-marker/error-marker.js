@@ -1,5 +1,5 @@
 import React from 'react';
-import './error-marker.css'
+import './error-marker.css';
 const ErrorMarker = () => {
 return (
     <div className="error-marker">
