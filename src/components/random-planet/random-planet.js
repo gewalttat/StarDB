@@ -17,6 +17,8 @@ export default class RandomPlanet extends Component {
   constructor() {
     super();
     this.updatePlanet();
+    //установка интервала обновления планеты
+    setInterval(this.updatePlanet, 7000);
   }
 
   onPlanetLoaded = (planet) => {
@@ -33,7 +35,7 @@ this.setState ({
 });
   };
 //функция рандомной планеты
-  updatePlanet() {
+  updatePlanet = () => {
     //ловит рандом ид в диапазоне
     const id = Math.floor(Math.random()*25)+2;
     //передает его в сваписервис
@@ -43,7 +45,7 @@ this.setState ({
       .then(this.onPlanetLoaded)
       //отлавливает onError в ходе выполнения (если ид вне диапазона)
       .catch(this.onError);
-  }
+  };
 
   render() {
     const {planet, loading, error} = this.state;
