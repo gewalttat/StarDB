@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
-
+import swapiService from '/src/services/swapi-service';
 import './item-list.css';
 
 export default class ItemList extends Component {
+  swapiService = new swapiService();
+  
+  state = {
+    peopleList : null
+  }
+
+  componentDidMount() {
+    this.swapiService
+    .getAllPeople()
+    .then((peopleList) => {
+    this.setState ({
+      peopleList
+    });
+    });
+  };
 
   render() {
     return (
