@@ -15,33 +15,29 @@ componentDidMount() {
 
 updatePerson() {
   const {personId} = this.props;
-  if (personId) {
+  if (!personId) {
     return;
   }
 
   this.SwapiService
   .getPerson(personId)
   .then((person) => {
-    this.setState({person})
+    this.setState({person});
   });
 }
 
 render() {
-
   if(!this.state.person) {
     return <span>Select a person from a list</span>
   }
-  const {person:{
-    id, name, gender, birthYear, eyeColor
-  }} = this.state.person;
+  const { id, name, gender, birthYear, eyeColor } = this.state.person;
 
     return (
       <div className="person-details card">
         <img className="person-image"
           src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}/>
-
         <div className="card-body">
-          <h4>{name}}</h4>
+          <h4>{name}</h4>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
               <span className="term">Gender :</span>
