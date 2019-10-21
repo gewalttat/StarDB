@@ -11,7 +11,13 @@ state = {
 
 componentDidMount() {
   this.updatePerson();
-}
+};
+
+componentDidUpdate(prevProps) {
+  if(this.props.personId !== prevProps.personId) {
+this.updatePerson();
+  };
+};
 
 updatePerson() {
   const {personId} = this.props;

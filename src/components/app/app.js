@@ -9,7 +9,7 @@ export default class App extends Component {
 
     state = {
       showRandomPlanet: true,
-      selectedPerson: 5
+      selectedPerson : Math.floor(Math.random()*25)+2
     };
   
     toggleRandomPlanet = () => {
