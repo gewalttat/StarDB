@@ -39,6 +39,7 @@ this.setState ({
   loading : false
 });
   };
+
 //функция рандомной планеты
   updatePlanet = () => {
     //ловит рандом ид в диапазоне
@@ -72,6 +73,7 @@ const content = hasData ? <PlanetView planet={planet}/> : null;
     );
   }
 }
+
 //показ кишок планеты
 const PlanetView = ({ planet }) => {
 //тащит деструктурированием кишки из планеты
