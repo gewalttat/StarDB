@@ -3,7 +3,8 @@ import './error-marker.css';
 const ErrorMarker = () => {
 return (
     <div className="error-marker">
-    <span className='boom'> BOOM! 
+    <span className='boom'> 
+    BOOM! 
     </span>
     <span>
     something has gone wrong...
