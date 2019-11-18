@@ -5,12 +5,14 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import './app.css';
 import ErrorButton from '../error-button/error-button';
+import ErrorMarker from '../error-marker/error-marker';
 
 export default class App extends Component {
 
     state = {
       showRandomPlanet: true,
-      selectedPerson : Math.floor(Math.random()*25)+2
+      selectedPerson : Math.floor(Math.random()*25)+2,
+      hasError : false
     };
   
     toggleRandomPlanet = () => {
@@ -27,8 +29,15 @@ export default class App extends Component {
       });
     };
   
+    componentDidCatch() {
+      console.log('Error catch!');
+this.setState({hasError : true});
+    }
+
     render() {
-  
+  if (this.setState.hasError) {
+    return <ErrorMarker/>
+  }
       const planet = this.state.showRandomPlanet ?
         <RandomPlanet/> :
         null;
