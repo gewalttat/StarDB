@@ -4,6 +4,7 @@ import RandomPlanet from '../random-planet';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import './app.css';
+import ErrorButton from '../error-button/error-button';
 
 export default class App extends Component {
 
@@ -36,12 +37,15 @@ export default class App extends Component {
         <div className="stardb-app">
           <Header />
           { planet }
-  
+  <div className='row mb2 button-row'>
           <button
             className="toggle-planet btn btn-warning btn-lg"
             onClick={this.toggleRandomPlanet}>
             Toggle Random Planet
           </button>
+          <ErrorButton/>
+          </div>
+
   
           <div className="row mb2">
             <div className="col-md-6">
