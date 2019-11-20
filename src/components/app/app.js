@@ -6,12 +6,12 @@ import PersonDetails from '../person-details';
 import './app.css';
 import ErrorButton from '../error-button/error-button';
 import ErrorMarker from '../error-marker/error-marker';
+import PeoplePage from '../people-page/people-page';
 
 export default class App extends Component {
 
     state = {
       showRandomPlanet: true,
-      selectedPerson : Math.floor(Math.random()*25)+2,
       hasError : false
     };
   
@@ -23,11 +23,7 @@ export default class App extends Component {
       });
     };
   
-    onPersonSelected = (id) => {
-      this.setState({
-        selectedPerson: id
-      });
-    };
+
   
     componentDidCatch() {
       console.log('Error catch!');
@@ -54,17 +50,10 @@ this.setState({hasError : true});
           </button>
           <ErrorButton/>
           </div>
-
-  
-          <div className="row mb2">
-            <div className="col-md-6">
-              <ItemList onItemSelected={this.onPersonSelected}/>
-            </div>
-            <div className="col-md-6">
-              <PersonDetails personId={this.state.selectedPerson} />
-            </div>
-          </div>
-        </div>
+          <PeoplePage />
+          <PeoplePage />
+          <PeoplePage />
+          </div> 
       );
     }
   }
