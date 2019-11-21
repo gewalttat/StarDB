@@ -1,6 +1,7 @@
 import React from 'react';
 import icon from './death-star.png';
 import './error-marker.css';
+//сообщение пользователю при ошибке на странице
 const ErrorMarker = () => {
     return (
         <div className="error-indicator">

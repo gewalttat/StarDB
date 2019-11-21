@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
 import './app.css';
 import ErrorButton from '../error-button/error-button';
 import ErrorMarker from '../error-marker/error-marker';
@@ -14,7 +12,7 @@ export default class App extends Component {
       showRandomPlanet: true,
       hasError : false
     };
-  
+  //импортирует в стейт функцию рандомной планеты
     toggleRandomPlanet = () => {
       this.setState((state) => {
         return {
@@ -23,15 +21,15 @@ export default class App extends Component {
       });
     };
   
-
-  
     componentDidCatch() {
       console.log('Error catch!');
 this.setState({hasError : true});
     }
 
     render() {
+      //рендерит страницу если код выполняется без ошибки
   if (this.setState.hasError) {
+    //если есть ошибка бросает маркер
     return <ErrorMarker/>
   }
       const planet = this.state.showRandomPlanet ?

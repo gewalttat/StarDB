@@ -9,7 +9,7 @@ export default class ItemList extends Component {
   state = {
     peopleList : null
   }
-
+//заменяет peoplelist в стейте
   componentDidMount() {
     this.swapiService
     .getAllPeople()
@@ -19,7 +19,7 @@ export default class ItemList extends Component {
     });
     });
   };
-
+//возвращает в рендер пару ключ значение (ид, имя) 
   renderItems(arr) {
     return arr.map(({id, name}) => {
       return (
@@ -34,9 +34,11 @@ export default class ItemList extends Component {
 
   render() {
     const { peopleList } = this.state;
+    //если список персонажей не грузится рендерит лодер
     if (!peopleList) {
       return <Preloader/>;
     }
+    //рендерит items как peoplelist
 const items = this.renderItems(peopleList);
     return (
       <ul className="item-list list-group">

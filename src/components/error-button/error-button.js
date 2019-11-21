@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
 import './error-button.css';
 
 export default class ErrorButton extends Component {
-
+//дропает ошибку при нажатии на кнопку, ничего особенного
   state = {
     renderError: false
   };
