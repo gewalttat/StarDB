@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
-import SwapiService from '../../services/swapi-service';
 import './item-list.css';
 import Preloader from '../preloader/preloader';
 
 export default class ItemList extends Component {
-  swapiService = new SwapiService();
   
   state = {
-    peopleList : null
+    itemList : null
   }
 //заменяет peoplelist в стейте
   componentDidMount() {
-    this.swapiService
-    .getAllPeople()
-    .then((peopleList) => {
+const {getData } = this.props;
+    getData().then((itemList) => {
     this.setState ({
-      peopleList
+      itemList
     });
     });
   };
@@ -33,13 +30,13 @@ export default class ItemList extends Component {
   }
 
   render() {
-    const { peopleList } = this.state;
+    const { itemList } = this.state;
     //если список персонажей не грузится рендерит лодер
-    if (!peopleList) {
+    if (!itemList) {
       return <Preloader/>;
     }
     //рендерит items как peoplelist
-const items = this.renderItems(peopleList);
+const items = this.renderItems(itemList);
     return (
       <ul className="item-list list-group">
        {items}

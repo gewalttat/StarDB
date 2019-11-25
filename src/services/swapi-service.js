@@ -2,47 +2,48 @@ export default class SwapiService {
     //указание источника данных для getResource
     _apiBase = 'https://swapi.co/api';
     //основная асинхронная функция, возвращающая промис возвращающий данные с swapi.co(?)
-    async getResource(url) {
+getResource = async(url) => {
         const res = await fetch(`${this._apiBase}${url}`);
         //бросает ошибку если нет респонса
         if (!res.ok) {
-            throw new Error()
+            throw new Error(`Could not fetch ${url}` +
+            `, received ${res.status}`)
         };
         //отдает респонс в жсыне
         return await res.json();
     };
     //отдают респонс или ошибку по разделам swapi.co
     //в теле функции идут только разделы т.к. основной адрес получения указан в apiBase
-    async getAllPeople() {
+    getAllPeople = async() => {
         const res = await this.getResource(`/people/`);
         //возвращает респонс массивом
         return res.results.map(this._transformPerson);
     };
-    async getPerson(id) {
+   getPerson = async(id) => {
         const person = await this.getResource(`/people/${id}/`);
         return this._transformPerson(person);
     };
-    async getAllPlanets() {
+    getAllPlanets = async() => {
         const res = await this.getResource(`/planets/`);
         return res.results.map(this._transformPlanet);
     };
-    async getPlanet(id) {
+    getPlanet = async(id) => {
     const planet = await this.getResource(`/planets/${id}/`);
     return this._transformPlanet(planet);
 };
 
-    async getAllStarships() {
+    getAllStarships = async() => {
         const res = await this.getResource(`/starships/`);
         return res.results.map(this._transformStarship);
       }
     
 
-      async getStarship(id) {
+      getStarship = async(id) => {
         const starship = this.getResource(`/starships/${id}/`);
         return this._transformStarship(starship);
       }
     //вычленение id из состава swapi
-    _extractId(item) {
+    _extractId = (item) => {
       //регулярное выражение получающее id с адресной строки компонента
         const idRegExp = /\/([0-9]*)\/$/;
         return item.url.match(idRegExp)[1];
