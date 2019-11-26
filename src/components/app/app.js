@@ -58,8 +58,9 @@ this.setState({hasError : true});
             <div className="row mb2">
               <div className="col-md-6">
                 <ItemList
-                  onItemSelected={this.onPersonSelected}
-                  getData={this.swapiService.getAllPlanets} />
+                  onItemSelected = {this.onPersonSelected}
+                  getData = {this.swapiService.getAllPlanets} 
+                  renderItem = {({name, diameter, population}) => `${name} (${diameter}, ${population})`} />
               </div>
               <div className="col-md-6">
                 <PersonDetails personId={this.state.selectedPerson} />
@@ -70,7 +71,8 @@ this.setState({hasError : true});
               <div className="col-md-6">
                 <ItemList
                   onItemSelected={this.onPersonSelected}
-                  getData={this.swapiService.getAllStarships} />
+                  getData={this.swapiService.getAllStarships}
+                  renderItem = {({name, model, crew}) => `${name} (${model}, ${crew})`} />
               </div>
               <div className="col-md-6">
                 <PersonDetails personId={this.state.selectedPerson} />

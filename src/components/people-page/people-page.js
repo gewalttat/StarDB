@@ -33,7 +33,8 @@ hasError: true
           <div className="col-md-6">
             <ItemList
               onItemSelected={this.onPersonSelected}
-              getData={this.swapiService.getAllPeople}/>
+              getData={this.swapiService.getAllPeople}
+              renderItem = {({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`} />
           </div>
           <div className="col-md-6">
             <PersonDetails personId={this.state.selectedPerson} />
