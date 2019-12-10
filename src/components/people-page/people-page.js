@@ -4,23 +4,7 @@ import PersonDetails from '../person-details/person-details';
 import './people-page.css';
 import SwapiService from "../../services/swapi-service";
 import ErrorMarker from '../error-marker/error-marker';
-
-//компонент-контейнер
-const Row = ({left, right}) => {
-  return (
-    //задает стили для заменяемых элементов
-    //т.к. это бутстрап, left/right не означает именно фиксацию лево/право, т.к. блоки будут двигаться 
-    //вместе с изменением размера страницы
-    <div className="row mb2">
-      <div className="col-md-6">
-        {left}
-      </div>
-      <div className="col-md-6">
-{right}        
-      </div>
-    </div>
-  );
-}
+import Row from '../row/row';
 export default class PeoplePage extends Component {
 swapiService = new SwapiService();
   
@@ -44,12 +28,15 @@ hasError: true
         return <ErrorMarker />;
       }
 
-  const itemList = (
-    <ItemList
-    onItemSelected={this.onPersonSelected}
-    getData={this.swapiService.getAllPeople}
-    renderItem = {({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`} />
-  );
+      const itemList = (
+        <ItemList
+          onItemSelected={this.onPersonSelected}
+          getData={this.swapiService.getAllPeople}>
+          {(i) => (
+            `${i.name}`
+            )}
+          </ItemList>
+      );
 
   const personDetails = (
     <PersonDetails personId={this.state.selectedPerson} />
