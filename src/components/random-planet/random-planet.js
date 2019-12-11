@@ -1,89 +1,81 @@
 import React, { Component } from 'react';
+
+import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-service';
+
 import './random-planet.css';
-import Preloader from '../preloader/preloader';
-import ErrorMarker from '../error-marker/error-marker';
+
 export default class RandomPlanet extends Component {
 
   swapiService = new SwapiService();
-  //установка состояния компонента: планета является объектом получаемым из сваписервис
-  //loading и error являют статусы состояния
+
   state = {
     planet: {},
-    loading: true,
-    error: false
+    loading: true
   };
 
-  constructor() {
-    super();
+  componentDidMount() {
     this.updatePlanet();
-    //установка интервала обновления планеты
-this.interval = setInterval(this.updatePlanet, 7000);  
+    this.interval = setInterval(this.updatePlanet, 10000);
   }
 
   componentWillUnmount() {
-    //сброс интервала обновления(зачем?)
     clearInterval(this.interval);
   }
 
   onPlanetLoaded = (planet) => {
-    this.setState({ 
-      planet, 
-      loading : false
+    this.setState({
+      planet,
+      loading: false,
+      error: false
     });
   };
-  //просто меняет в стейте состояние error 
+
   onError = (err) => {
-this.setState ({
-  error : true,
-  loading : false
-});
+    this.setState({
+      error: true,
+      loading: false
+    });
   };
 
-//функция рандомной планеты
   updatePlanet = () => {
-    //ловит рандом ид в диапазоне
-    const id = Math.floor(Math.random()*25)+2;
-    //передает его в сваписервис
+    const id = Math.floor(Math.random()*17) + 2;
     this.swapiService
       .getPlanet(id)
-      //промисом грузит контент
       .then(this.onPlanetLoaded)
-      //отлавливает onError в ходе выполнения (если ид вне диапазона)
       .catch(this.onError);
   };
 
   render() {
-    const {planet, loading, error} = this.state;
-    //отображение контента
+    const { planet, loading, error } = this.state;
+
     const hasData = !(loading || error);
-    //если есть ошибка - выкидывает жсх с маркером, если нет игнорирует
-    const errorMessage = error ? <ErrorMarker/> : null;
-    //если идет загрузка показывает лоадер
-const preloader = loading ? <Preloader/> : null;
-//если hasData активен - показывает контент
-const content = hasData ? <PlanetView planet={planet}/> : null;
+
+    const errorMessage = error ? <ErrorIndicator/> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = hasData ? <PlanetView planet={planet}/> : null;
 
     return (
       <div className="random-planet jumbotron rounded">
-      {errorMessage}
-      {preloader}
-      {content}
+        {errorMessage}
+        {spinner}
+        {content}
       </div>
     );
   }
 }
 
-//показ кишок планеты
 const PlanetView = ({ planet }) => {
-//тащит деструктурированием кишки из планеты
+
   const { id, name, population,
     rotationPeriod, diameter } = planet;
 
   return (
     <React.Fragment>
       <img className="planet-image"
-           src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
+           src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+           alt="planet" />
       <div>
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
@@ -104,3 +96,6 @@ const PlanetView = ({ planet }) => {
     </React.Fragment>
   );
 };
+
+
+

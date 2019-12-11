@@ -1,48 +1,47 @@
 import React, { Component } from 'react';
+
 import ItemList from '../item-list/item-list';
 import PersonDetails from '../person-details/person-details';
+import SwapiService from '../../services/swapi-service';
+import Row from '../row';
+import ErrorBoundry from '../error-boundry';
+
 import './people-page.css';
-import SwapiService from "../../services/swapi-service";
-import ErrorMarker from '../error-marker/error-marker';
-import Row from '../row/row';
+
 export default class PeoplePage extends Component {
-swapiService = new SwapiService();
-  
-state = {
-selectedPerson: Math.floor(Math.random()*25)+2,
-hasError: false
-};
-  
-componentDidCatch(error, info) {
-this.setState({
-hasError: true
-});
-}
-  
-    onPersonSelected = (selectedPerson) => {
-      this.setState({ selectedPerson });
-    };
-  
-    render() {
-      if (this.state.hasError) {
-        return <ErrorMarker />;
-      }
 
-      const itemList = (
-        <ItemList
-          onItemSelected={this.onPersonSelected}
-          getData={this.swapiService.getAllPeople}>
-          {(i) => (
-            `${i.name}`
-            )}
-          </ItemList>
-      );
+  swapiService = new SwapiService();
 
-  const personDetails = (
-    <PersonDetails personId={this.state.selectedPerson} />
-  );
-      return (
-      <Row left={itemList} right={personDetails}/>
-      );
-    }
+  state = {
+    selectedPerson: Math.floor(Math.random()*25)+2
+  };
+
+  onPersonSelected = (selectedPerson) => {
+    this.setState({ selectedPerson });
+  };
+
+  render() {
+
+    const itemList = (
+      <ItemList
+        onItemSelected={this.onPersonSelected}
+        getData={this.swapiService.getAllPeople}>
+
+        {(i) => (
+          `${i.name} (${i.birthYear})`
+        )}
+
+      </ItemList>
+    );
+
+    const personDetails = (
+      <ErrorBoundry>
+        <PersonDetails personId={this.state.selectedPerson} />
+      </ErrorBoundry>
+    );
+
+    return (
+      <Row left={itemList} right={personDetails} />
+    );
   }
+}
