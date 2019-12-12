@@ -3,15 +3,17 @@ import Row from '../row'
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorButton from '../error-button';
-import PeoplePage from '../people-page';
+import ItemDetails from '../item-details';
 import ErrorBoundry from "../error-boundry";
+import SwapiService from '../../services/swapi-service'
 
 import './app.css';
-import ItemDetails from '../item-details/item-details';
 
 export default class App extends Component {
 
-  state = {
+swapiService = new SwapiService();
+  
+state = {
     showRandomPlanet: true
   };
 
@@ -28,12 +30,20 @@ export default class App extends Component {
     const planet = this.state.showRandomPlanet ?
       <RandomPlanet/> :
       null;
-const personDetails = (
-  <ItemDetails itemId={11}/>
+
+      const { getPerson, getStarship } = this.swapiService;
+
+      const personDetails = (
+  <ItemDetails 
+  itemId={11} 
+  getData={getPerson} />
 );
+
 const starshipDetails = (
-  <ItemDetails itemId={5}/>
-)
+  <ItemDetails 
+  itemId={5}
+  getData={getStarship} />
+);
 
     return (
       <ErrorBoundry>

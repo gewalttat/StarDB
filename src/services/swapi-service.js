@@ -17,31 +17,36 @@ getResource = async(url) => {
     getAllPeople = async() => {
         const res = await this.getResource(`/people/`);
         //возвращает респонс массивом
-        return res.results.map(this._transformPerson);
+        return res.results
+        .map(this._transformPerson)
+        .slice(0,5);
     };
-   getItem = async(id) => {
-        const item = await this.getResource(`/people/${id}/`);
-        return this._transformPerson(item);
+    getPerson = async (id) => {
+      const person = await this.getResource(`/people/${id}/`);
+      return this._transformPerson(person);
     };
-    getAllPlanets = async() => {
-        const res = await this.getResource(`/planets/`);
-        return res.results.map(this._transformPlanet);
+    getAllPlanets = async () => {
+      const res = await this.getResource(`/planets/`);
+      return res.results
+        .map(this._transformPlanet)
+        .slice(0, 5);
     };
-    getPlanet = async(id) => {
-    const planet = await this.getResource(`/planets/${id}/`);
-    return this._transformPlanet(planet);
-};
+    getPlanet = async (id) => {
+      const planet = await this.getResource(`/planets/${id}/`);
+      return this._transformPlanet(planet);
+    };
 
-    getAllStarships = async() => {
-        const res = await this.getResource(`/starships/`);
-        return res.results.map(this._transformStarship);
-      }
-    
-
-      getStarship = async(id) => {
-        const starship = this.getResource(`/starships/${id}/`);
+    getAllStarships = async () => {
+      const res = await this.getResource(`/starships/`);
+      return res.results
+        .map(this._transformStarship)
+        .slice(0, 5);
+    };
+getStarship = async(id) => {
+        const starship = await this.getResource(`/starships/${id}/`);
         return this._transformStarship(starship);
-      }
+      };
+      
     //вычленение id из состава swapi
     _extractId = (item) => {
       //регулярное выражение получающее id с адресной строки компонента
