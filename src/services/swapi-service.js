@@ -19,9 +19,9 @@ getResource = async(url) => {
         //возвращает респонс массивом
         return res.results.map(this._transformPerson);
     };
-   getPerson = async(id) => {
-        const person = await this.getResource(`/people/${id}/`);
-        return this._transformPerson(person);
+   getItem = async(id) => {
+        const item = await this.getResource(`/people/${id}/`);
+        return this._transformPerson(item);
     };
     getAllPlanets = async() => {
         const res = await this.getResource(`/planets/`);
