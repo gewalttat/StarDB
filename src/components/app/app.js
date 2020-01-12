@@ -31,18 +31,20 @@ state = {
       <RandomPlanet/> :
       null;
 
-      const { getPerson, getStarship } = this.swapiService;
+      const { getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
 
       const personDetails = (
   <ItemDetails 
-  itemId={11} 
-  getData={getPerson} />
+  itemId={Math.floor(Math.random()*25)+2} 
+  getData={getPerson}
+  getImageUrl={getPersonImage} />
 );
 
 const starshipDetails = (
   <ItemDetails 
-  itemId={5}
-  getData={getStarship} />
+  itemId={Math.floor(Math.random()*25)+2}
+  getData={getStarship}
+  getImageUrl={getStarshipImage} />
 );
 
     return (

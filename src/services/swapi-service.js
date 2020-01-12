@@ -1,6 +1,7 @@
 export default class SwapiService {
     //указание источника данных для getResource
     _apiBase = 'https://swapi.co/api';
+    imageBase = 'https://starwars-visualguide.com/assets/img/';
     //основная асинхронная функция, возвращающая промис возвращающий данные с swapi.co(?)
 getResource = async(url) => {
         const res = await fetch(`${this._apiBase}${url}`);
@@ -47,6 +48,15 @@ getStarship = async(id) => {
         return this._transformStarship(starship);
       };
       
+      getPersonImage = ({id}) => {
+        return `${this.imageBase}/characters/${id}.jpg`
+      };
+      getStarshipImage = ({id}) => {
+        return `${this.imageBase}/starships/${id}.jpg`
+      };  
+      getPlanetImage = ({id}) => {
+        return `${this.imageBase}/planets/${id}.jpg`
+      };
     //вычленение id из состава swapi
     _extractId = (item) => {
       //регулярное выражение получающее id с адресной строки компонента
