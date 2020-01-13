@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import Row from '../row'
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ErrorButton from '../error-button';
-import ItemDetails from '../item-details';
+//неймед экспорт
+import ItemDetails, {Record} from '../item-details/item-details';
 import ErrorBoundry from "../error-boundry";
-import SwapiService from '../../services/swapi-service'
-
+import SwapiService from '../../services/swapi-service';
 import './app.css';
 
 export default class App extends Component {
@@ -37,14 +36,20 @@ state = {
   <ItemDetails 
   itemId={Math.floor(Math.random()*25)+2} 
   getData={getPerson}
-  getImageUrl={getPersonImage} />
+  getImageUrl={getPersonImage}>
+  <Record field = 'gender' label = 'Gender' />
+  <Record field = 'eyeColor' label = 'Eye Color' />
+</ItemDetails>
 );
 
 const starshipDetails = (
   <ItemDetails 
   itemId={Math.floor(Math.random()*25)+2}
   getData={getStarship}
-  getImageUrl={getStarshipImage} />
+  getImageUrl={getStarshipImage}>
+  <Record field = 'gender' label = 'Gender' />
+  <Record field = 'eyeColor' label = 'Eye Color' />
+</ItemDetails>
 );
 
     return (
