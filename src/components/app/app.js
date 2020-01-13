@@ -41,7 +41,7 @@ state = {
   <Record field = 'eyeColor' label = 'Eye Color' />
 </ItemDetails>
 );
-
+//инстанс позволяющий не хардкодить свойсва итема
 const starshipDetails = (
   <ItemDetails 
   itemId={Math.floor(Math.random()*25)+2}

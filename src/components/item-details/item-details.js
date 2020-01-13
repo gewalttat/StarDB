@@ -40,7 +40,7 @@ export default class ItemDetails extends Component {
     if (!itemId) {
       return;
     }
-
+//получает ид итема, по нему стейт картинки изменяется на ид
     getData(itemId)
       .then((item) => {
         this.setState({ item, image: getImageUrl(item) });
@@ -50,12 +50,14 @@ export default class ItemDetails extends Component {
   render() {
 
     const { item, image } = this.state;
+    //если итем не определяется выкидывает надпись
+    //надо бы то же самое для картинки сделать, наверное
     if (!item) {
       return <span>Select a person from a list</span>;
     }
 
     const { name, gender, birthYear, eyeColor } = item;
-
+//возвращает чайлд из реакт.чилдрен.мап (потому что чайлдом может быть все что угодно бла бла) 
     return (
       <div className="item-details card">
         <img className="item-image"
@@ -65,7 +67,9 @@ export default class ItemDetails extends Component {
         <div className="card-body">
           <h4>{name}</h4>
           <ul className="list-group list-group-flush">
-           {this.props.children}
+           {React.Children.map(this.props.children, (child) => {
+             return child;
+           })}
           </ul>
           <ErrorButton />
         </div>
