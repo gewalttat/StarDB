@@ -33,6 +33,7 @@ state = {
       const { getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
 
       const personDetails = (
+        //приложение иногда вылетает из-за отсутствия рандомных ид, но так всё равно прикольней
   <ItemDetails 
   itemId={Math.floor(Math.random()*25)+2} 
   getData={getPerson}
