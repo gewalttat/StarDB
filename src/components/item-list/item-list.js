@@ -15,9 +15,10 @@ export default class ItemList extends Component {
   componentDidMount() {
 
     const { getData } = this.props;
-
+//запрос на данные 
     getData()
       .then((itemList) => {
+        //обновление стейта айтемлист полученными данными
         this.setState({
           itemList
         });
@@ -42,7 +43,7 @@ export default class ItemList extends Component {
   render() {
 
     const { itemList } = this.state;
-
+//отображает лодер если нет данных
     if (!itemList) {
       return <Preloader />;
     }
@@ -56,3 +57,11 @@ export default class ItemList extends Component {
     );
   }
 }
+
+const f = (a) => {
+  return class extends Component  {
+    render() {
+      return <ItemList {...this.props}/>
+    }
+  }
+};
