@@ -38,8 +38,8 @@ state = {
   itemId={Math.floor(Math.random()*25)+2} 
   getData={getPerson}
   getImageUrl={getPersonImage}>
-  <Record field = 'gender' label = 'Gender' />
-  <Record field = 'eyeColor' label = 'Eye Color' />
+  <Record field = 'gender' label = 'Gender:' />
+  <Record field = 'eyeColor' label = 'Eye Color:' />
 </ItemDetails>
 );
 //инстанс позволяющий не хардкодить свойсва итема
@@ -48,8 +48,9 @@ const starshipDetails = (
   itemId={Math.floor(Math.random()*25)+2}
   getData={getStarship}
   getImageUrl={getStarshipImage}>
-  <Record field = 'gender' label = 'Gender' />
-  <Record field = 'eyeColor' label = 'Eye Color' />
+  <Record field = 'model' label = 'Model:' />
+  <Record field = 'length' label = 'Length:' />
+  <Record field = 'costInCredits' label = 'Cost:' />
 </ItemDetails>
 );
 
