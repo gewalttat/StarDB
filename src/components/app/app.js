@@ -50,6 +50,7 @@ const starshipDetails = (
   getImageUrl={getStarshipImage}>
   <Record field = 'model' label = 'Model:' />
   <Record field = 'length' label = 'Length:' />
+{/* почему то не отображает стоимость */}
   <Record field = 'costInCredits' label = 'Cost:' />
 </ItemDetails>
 );
