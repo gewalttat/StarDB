@@ -8,6 +8,14 @@ import getAllStarships from '../item-list/';
 import ItemDetails, { Record } from "../item-details/item-details";
 import SwapiService from "../../services/swapi-service";
 import ItemList from '../item-list';
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from '../sw-components';
 import './app.css';
 
 export default class App extends Component {
@@ -70,19 +78,17 @@ return (
       left={personDetails}
       right={starshipDetails} />
 
-      <ItemList
-        getData={getAllPeople}
-        onItemSelected={() => {}}>
-
+      <PersonList>
         { ({name}) => <span>{name}</span> }
-      </ItemList>
+      </PersonList>
 
-      <ItemList
-        getData={getAllStarships}
-        onItemSelected={() => {}}>
+      <PlanetList>
+      { ({name}) => <span>{name}</span> }
+    </PlanetList>
 
-        { ({name}) => <span>{name}</span> }
-      </ItemList>
+    <StarshipList>
+    { ({name}) => <span>{name}</span> }
+  </StarshipList>
 
     </div>
   </ErrorBoundry>
