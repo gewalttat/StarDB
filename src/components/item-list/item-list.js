@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './item-list.css';
+//докинулся импорт withData потому что удобнее(?)
+import {withData} from '../hoc-helper/with-data';
 import SwapiService from "../../services/swapi-service";
-import Preloader from "../preloader/preloader";
 
 //механика
  const ItemList = (props) => {
@@ -24,35 +25,6 @@ import Preloader from "../preloader/preloader";
       </ul>
     );
   };
-//функция может возвращать другую функцию
-//картинка
-const withData = (View, getData) => {
-  return class extends Component  {
-    state = {
-      data : null
-    };
-
-    componentDidMount() {
-  //запрос на данные 
-      getData()
-        .then((data) => {
-          //обновление стейта айтемлист полученными данными
-          this.setState({
-            data
-          });
-        });
-    }
-    render() {
-      const { data } = this.state;
-//отображает лодер если нет данных
-    if (!data) {
-      return <Preloader />;
-    }
-      //ловит всё что передалось из app в итемлист
-      return <View {...this.props} data={data}/>
-    }
-  }
-};
 //данные с сервиса
 const {getAllPeople} = new SwapiService();
 //понятия не имею для чего нужно было это разделение дающее независимость
