@@ -1,7 +1,7 @@
 import React from 'react';
 import './item-list.css';
 //докинулся импорт withData потому что удобнее(?)
-import {withData} from '../hoc-helper/with-data';
+import withData from '../hoc-helper/with-data';
 import SwapiService from "../../services/swapi-service";
 
 //механика
@@ -26,6 +26,7 @@ import SwapiService from "../../services/swapi-service";
     );
   };
 //данные с сервиса
-const {getAllPeople} = new SwapiService();
+const { getAllPeople } = new SwapiService();
+const { getAllStarships } = new SwapiService();
 //понятия не имею для чего нужно было это разделение дающее независимость
-export default withData(ItemList, getAllPeople);
+export default withData (ItemList, getAllPeople, getAllStarships);
