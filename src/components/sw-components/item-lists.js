@@ -1,4 +1,3 @@
-import React from 'react';
 import ItemList from '../item-list/';
 import {withData} from '../hoc-helper';
 import SwapiService from '../../services/swapi-service';
@@ -12,6 +11,7 @@ const {
 } = swapiService;
 
 //заброс в константы данных по списку получающему данные с разных гетов
+//в withData можно закинуть только списки, кажется
 const PersonList = withData(ItemList, getAllPeople);
 const PlanetList = withData(ItemList, getAllPlanets)
 const StarshipList = withData(ItemList, getAllStarships)

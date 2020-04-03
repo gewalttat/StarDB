@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import Row from '../row/';
 import Header from '../header';
-import RandomPlanet from '../random-planet';
 import ErrorBoundry from '../error-boundry';
-import getAllPeople from '../hoc-helper/with-data';
-import getAllStarships from '../item-list/';
-import ItemDetails, { Record } from "../item-details/item-details";
 import SwapiService from "../../services/swapi-service";
-import ItemList from '../item-list';
 import {
   PersonDetails,
   PlanetDetails,
@@ -21,12 +15,12 @@ import './app.css';
 export default class App extends Component {
 
 swapiService = new SwapiService();
-  
+
+//тоже видимо уже не применяется но пусть пока полежит  
 state = {
     showRandomPlanet: true
   };
-
-  toggleRandomPlanet = () => {
+toggleRandomPlanet = () => {
     this.setState((state) => {
       return {
         showRandomPlanet: !state.showRandomPlanet
@@ -34,49 +28,21 @@ state = {
     });
   };
 
-  render() {
-
-    const planet = this.state.showRandomPlanet ?
-      <RandomPlanet/> :
-      null;
-
-      const { getPerson,
-        getStarship,
-        getPersonImage,
-        getStarshipImage } = this.swapiService;
-
-      const personDetails = (
-        //приложение иногда вылетает из-за отсутствия рандомных ид, но так всё равно прикольней
-  <ItemDetails 
-  itemId={Math.floor(Math.random()*25)+2} 
-  getData={getPerson}
-  getImageUrl={getPersonImage}>
-  <Record field = 'name' label = 'Name:' />
-  <Record field = 'gender' label = 'Gender:' />
-  <Record field = 'eyeColor' label = 'Eye Color:' />
-</ItemDetails>
-);
-//инстанс позволяющий не хардкодить свойства итема
-const starshipDetails = (
-  <ItemDetails 
-  itemId={Math.floor(Math.random()*25)+2}
-  getData={getStarship}
-  getImageUrl={getStarshipImage}>
-  <Record field = 'model' label = 'Model:' />
-  <Record field = 'length' label = 'Length:' />
-{/* почему то не отображает стоимость */}
-  <Record field = 'costInCredits' label = 'Cost:' />
-</ItemDetails>
-);
-
+render() {
 return (
   <ErrorBoundry>
     <div className="stardb-app">
       <Header />
 
+      {/* по идее кусок уже не нужен, но пусть поваляется зачем нибудь
       <Row
       left={personDetails}
       right={starshipDetails} />
+      */}
+
+      <PersonDetails itemId={Math.floor(Math.random()*25)+2}/>
+      <PlanetDetails itemId={Math.floor(Math.random()*25)+2}/>
+      <StarshipDetails itemId={Math.floor(Math.random()*25)+2}/>
 
       <PersonList>
         { ({name}) => <span>{name}</span> }

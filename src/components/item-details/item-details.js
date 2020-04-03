@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import ErrorButton from '../error-button/error-button';
 import SwapiService from '../../services/swapi-service';
 
@@ -7,11 +6,12 @@ import './item-details.css';
 
 //для того чтоб не хардкодить свойства айтема
 //получает итем, поле и отображение в юи
+//используется в деталях итема в дальнейшем (собственно всё видно в теле рекорда)
 export const Record = ({item, field, label}) => {
   return (
     <li className="list-group-item">
     <span className="term">{label}</span>
-    <span>{item [field]}</span>
+    <span>{ item[field] }</span>
   </li>
   );
 };
@@ -25,6 +25,7 @@ export default class ItemDetails extends Component {
     image: null
   };
 
+  //видимо уже мусор
   componentDidMount() {
     this.updateItem();
   }
@@ -40,6 +41,7 @@ export default class ItemDetails extends Component {
     if (!itemId) {
       return;
     }
+
 //получает ид итема, по нему стейт картинки изменяется на ид
     getData(itemId)
       .then((item) => {
@@ -48,7 +50,6 @@ export default class ItemDetails extends Component {
   }
 
   render() {
-
     const { item, image } = this.state;
     //если итем не определяется выкидывает надпись
     //надо бы то же самое для картинки сделать, наверное
@@ -56,7 +57,7 @@ export default class ItemDetails extends Component {
       return <span>Select a person from a list</span>;
     }
 
-    const { name, gender, birthYear, eyeColor } = item;
+    const { name } = item;
 //возвращает чайлд из реакт.чилдрен.мап (потому что чайлдом может быть все что угодно бла бла) 
     return (
       <div className="item-details card">
