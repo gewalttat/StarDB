@@ -20,17 +20,26 @@ return (
     </Wrapped>
 )}
 };
-//оборачивание itemList в функцию сразу принимающую name 
-const ListWithChildren = withChildFunction(
-    ItemList,
-    ({name}) => <span>{name}</span>
-);
 
+const renderName = ({name}) => <span>{name}</span>;
+const renderModelAndName = ({name, model}) => <span>{name} ({model})</span>
+
+//оборачивание itemList в функцию сразу принимающую name 
+/*const ListWithChildren = withChildFunction(
+    ItemList, renderName); для понимания работы*/
 //заброс в константы данных по списку получающему данные с разных гетов
 //в withData можно закинуть только списки, кажется
-const PersonList = withData(ListWithChildren, getAllPeople);
-const PlanetList = withData(ListWithChildren, getAllPlanets)
-const StarshipList = withData(ListWithChildren, getAllStarships)
+const PersonList = withData(
+    withChildFunction(ItemList, renderName),
+    getAllPeople);
+
+const PlanetList = withData(
+    withChildFunction(ItemList, renderName), 
+    getAllPlanets);
+
+const StarshipList = withData(
+    withChildFunction(ItemList, renderModelAndName), 
+    getAllStarships);
 
 export {
     PersonList,
