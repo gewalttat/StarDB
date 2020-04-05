@@ -22,7 +22,8 @@ return (
 };
 
 const renderName = ({name}) => <span>{name}</span>;
-const renderModelAndName = ({name, model}) => <span>{name} ({model})</span>
+//тупо чтобы было
+const renderModelAndName = ({name, model}) => <span>{name} ({model})</span>;
 
 //оборачивание itemList в функцию сразу принимающую name 
 /*const ListWithChildren = withChildFunction(
