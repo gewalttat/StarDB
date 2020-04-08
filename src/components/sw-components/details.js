@@ -1,17 +1,11 @@
 import React from 'react';
 import ItemDetails, {Record} from '../item-details/item-details';
-import SwapiService from '../../services/swapi-service';
 import {SwapiServiceConsumer} from '../swapi-service-context';
 
-const swapiService = new SwapiService();
+
 
 //забирать геты конечно же с сервиса
-const {
-    getPlanet,
-    getStarship,
-    getPlanetImage,
-    getStarshipImage,
-} = swapiService;
+
 
 //переброс кишок компонентов из app в эту обёртку, по сути игра с полиморфизмом, но удобно, конечно
 //соответственно в арр все это дело удалено, хз почему в курсе не удаляют
@@ -38,6 +32,10 @@ const PersonDetails = ({itemId}) => {
 
 const StarshipDetails = ({itemId}) => {
     return (
+        <SwapiServiceConsumer>
+          {
+            ({ getStarship, getStarshipImage }) => {
+              return (
         <ItemDetails
         //итемИД не жестко закоден, я вообще выставил рандом (который иногда крашится) 
         itemId={itemId}//{Math.floor(Math.random()*25)+2}
@@ -50,11 +48,19 @@ const StarshipDetails = ({itemId}) => {
         <Record field = 'length' label = 'Length:' />
         <Record field = 'crew' label = 'Crew:' />
       </ItemDetails>
-    );
+      );
+    }
+  }
+</SwapiServiceConsumer>
+);
 };
 
 const PlanetDetails = ({itemId}) => {
     return (
+        <SwapiServiceConsumer>
+          {
+            ({ getPlanet, getPlanetImage }) => {
+              return (
         <ItemDetails 
         itemId={itemId}
         getData={getPlanet}
@@ -63,6 +69,10 @@ const PlanetDetails = ({itemId}) => {
         <Record field = 'diameter' label = 'Diameter:' />
         <Record field = 'rotationPeriod' label = 'Rotation period:' />
       </ItemDetails>
+      );
+    }
+  }
+</SwapiServiceConsumer>
     );
 };
 
