@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../header';
 import ErrorBoundry from '../error-boundry';
 import SwapiService from "../../services/swapi-service";
+import {SwapiServiceProvider} from '../swapi-service-context';
 import {
   PersonDetails,
   PlanetDetails,
@@ -10,7 +11,6 @@ import {
   PlanetList,
   StarshipList
 } from '../sw-components';
-import {swapiServiceProvider} from '../swapi-service-context';
 import './app.css';
 
 export default class App extends Component {
@@ -33,7 +33,7 @@ render() {
 return (
   <ErrorBoundry>
   {/* присвоение провайдера всему приложению */}
-  <swapiServiceProvider value={this.swapiService}>
+  <SwapiServiceProvider value={this.swapiService}>
     <div className="stardb-app">
       <Header />
 
@@ -52,7 +52,7 @@ return (
       <StarshipList/>
 
     </div>
-    </swapiServiceProvider>
+    </SwapiServiceProvider>
   </ErrorBoundry>
 );
 }

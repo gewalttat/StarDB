@@ -1,15 +1,14 @@
 import React from 'react';
 import ItemDetails, {Record} from '../item-details/item-details';
 import SwapiService from '../../services/swapi-service';
+import {SwapiServiceConsumer} from '../swapi-service-context';
 
 const swapiService = new SwapiService();
 
 //забирать геты конечно же с сервиса
 const {
-    getPerson,
     getPlanet,
     getStarship,
-    getPersonImage,
     getPlanetImage,
     getStarshipImage,
 } = swapiService;
@@ -18,14 +17,22 @@ const {
 //соответственно в арр все это дело удалено, хз почему в курсе не удаляют
 const PersonDetails = ({itemId}) => {
     return (
-        <ItemDetails 
-  itemId={itemId}
-  getData={getPerson}
-  getImageUrl={getPersonImage}>
-  <Record field = 'name' label = 'Name:' />
-  <Record field = 'gender' label = 'Gender:' />
-  <Record field = 'eyeColor' label = 'Eye Color:' />
-</ItemDetails>
+        <SwapiServiceConsumer>
+        {
+            ({ getPerson, getPersonImage }) => {
+                return (
+                <ItemDetails 
+                itemId={itemId}
+                getData={getPerson}
+                getImageUrl={getPersonImage}>
+                <Record field = 'name' label = 'Name:' />
+                <Record field = 'gender' label = 'Gender:' />
+                <Record field = 'eyeColor' label = 'Eye Color:' />
+              </ItemDetails>       
+            );
+        }
+    }
+</SwapiServiceConsumer>
     );
 };
 
