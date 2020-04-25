@@ -4,19 +4,23 @@ import { withSwapiService } from '../hoc-helper/with-swapi-service';
 
 //переброс кишок компонентов из app в эту обёртку, по сути игра с полиморфизмом, но удобно, конечно
 //соответственно в арр все это дело удалено, хз почему в курсе не удаляют
-const PersonDetails = ({itemId, swapiService}) => {
-  const {getPerson, getPersonImage} = swapiService;
+const PersonDetails = (props) => {
     return (
-                <ItemDetails 
-                itemId={itemId}
-                getData={getPerson}
-                getImageUrl={getPersonImage}>
+                <ItemDetails {...props}>
                 <Record field = 'name' label = 'Name:' />
                 <Record field = 'gender' label = 'Gender:' />
                 <Record field = 'eyeColor' label = 'Eye Color:' />
               </ItemDetails>       
     );
 };
+//мапит ключи на конкретные значения внутри сервиса
+// шоб не тянуть каждый раз всю бд целиком
+const mapMethodsToProps = (swapiService) => {
+  return {
+    getData : swapiService.getPerson,
+    getImageUrl : swapiService.getPersonImage
+  }
+}
 
 //экспорт всего на внешние модули
-export default withSwapiService(PersonDetails);
+export default withSwapiService(PersonDetails, mapMethodsToProps);

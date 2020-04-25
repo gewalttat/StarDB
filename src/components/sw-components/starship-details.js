@@ -1,20 +1,10 @@
 import React from 'react';
 import ItemDetails, {Record} from '../item-details/item-details';
-import {SwapiServiceConsumer} from '../swapi-service-context';
+import { withSwapiService } from '../hoc-helper/with-swapi-service';
 
-const StarshipDetails = ({itemId}) => {
+const StarshipDetails = (props) => {
     return (
-        <SwapiServiceConsumer>
-          {
-            ({ getStarship, getStarshipImage }) => {
-              return (
-        <ItemDetails
-        //итемИД не жестко закоден, я вообще выставил рандом (который иногда крашится) 
-        itemId={itemId}//{Math.floor(Math.random()*25)+2}
-        //получение с гета который получает с сервиса
-        getData={getStarship}
-        //туда же
-        getImageUrl={getStarshipImage}>
+        <ItemDetails {...props}>
     {/*запись описания итема импортированным рекордом*/}
         <Record field = 'model' label = 'Model:' />
         <Record field = 'length' label = 'Length:' />
@@ -22,11 +12,14 @@ const StarshipDetails = ({itemId}) => {
       </ItemDetails>
       );
     }
+
+//мапит ключи на конкретные значения внутри сервиса
+// шоб не тянуть каждый раз всю бд целиком
+const mapMethodsToProps = (swapiService) => {
+  return {
+    getData : swapiService.getStarship,
+    getImageUrl : swapiService.getStarshipImage
   }
-</SwapiServiceConsumer>
-);
-};
-
-
+}
 //экспорт всего на внешние модули
-export default StarshipDetails;
+export default withSwapiService(StarshipDetails, mapMethodsToProps);
