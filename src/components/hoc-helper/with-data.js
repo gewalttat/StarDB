@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Preloader from "../preloader/preloader";
 
 //миллениалы придумали полиморфизм ¯\_(ツ)_/¯
-//прикол с всратыми индекс.жс всё ещё непонятен но лень искать как нормально импортить
-const withData = (View, getData) => {
+const withData = (View) => {
     return class extends Component  {
       state = {
         data : null
@@ -11,7 +10,7 @@ const withData = (View, getData) => {
   
       componentDidMount() {
     //запрос на данные 
-        getData()
+        this.props.getData()
           .then((data) => {
             //обновление стейта айтемлист полученными данными
             this.setState({

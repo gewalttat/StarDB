@@ -53,9 +53,9 @@ export default class ItemDetails extends Component {
     const { item, image } = this.state;
     //если итем не определяется выкидывает надпись
     //надо бы то же самое для картинки сделать, наверное
-    if (!item) {
-      return <span>Select a person from a list</span>;
-    }
+  if (!item) {
+    return <p>бд приказала долго жить</p>
+  };
 
     const { name } = item;
 //возвращает чайлд из реакт.чилдрен.мап (потому что чайлдом может быть все что угодно бла бла) 
