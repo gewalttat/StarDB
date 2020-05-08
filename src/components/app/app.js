@@ -15,12 +15,19 @@ import './app.css';
 
 export default class App extends Component {
 
+//мне очень лениво делать руками затычку DummySwapiService, поэтому я скатаю её в гите создателя курса 
 swapiService = new SwapiService();
 
 //тоже видимо уже не применяется но пусть пока полежит  
 state = {
     showRandomPlanet: true
   };
+
+  //кнопка смены подачи вводных данных (с апи на локальные тестовые данные)
+onServiceChange = () => {
+console.log('123');
+}
+  
 toggleRandomPlanet = () => {
     this.setState((state) => {
       return {
@@ -35,7 +42,7 @@ return (
   {/* присвоение провайдера всему приложению */}
   <SwapiServiceProvider value={this.swapiService}>
     <div className="stardb-app">
-      <Header />
+      <Header onServiceChange={this.onServiceChange}/>
 
       {/* по идее кусок уже не нужен, но пусть поваляется зачем нибудь
       <Row
