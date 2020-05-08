@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
+import ErrorMarker from '../error-marker';
 import SwapiService from '../../services/swapi-service';
 
 import './random-planet.css';
@@ -52,7 +52,7 @@ export default class RandomPlanet extends Component {
 
     const hasData = !(loading || error);
 
-    const errorMessage = error ? <ErrorIndicator/> : null;
+    const errorMessage = error ? <ErrorMarker/> : null;
     const spinner = loading ? <Spinner /> : null;
     const content = hasData ? <PlanetView planet={planet}/> : null;
 
