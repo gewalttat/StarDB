@@ -1,27 +1,34 @@
 import React from 'react';
+
+
+import { withData } from '../hoc-helper/with-data';
+import SwapiService from "../../services/swapi-service";
 import './item-list.css';
 
-//механика
- const ItemList = (props) => {
-    const {data, onItemSelected, children:renderLabel} = props;
-    const items = data.map((item) => {
-      const { id } = item;
-      const label = renderLabel(item);
+const ItemList = (props) => {
 
-      return (
-        <li className="list-group-item"
-            key={id}
-            onClick={() => onItemSelected(id)}>
-          {label}
-        </li>
-      );
-    });
+  const { data, onItemSelected, children: renderLabel } = props;
+
+  const items = data.map((item) => {
+    const { id } = item;
+    const label = renderLabel(item);
+
     return (
-      <ul className="item-list list-group">
-        {items}
-      </ul>
+      <li className="list-group-item"
+          key={id}
+          onClick={() => onItemSelected(id)}>
+        {label}
+      </li>
     );
-  };
-//данные с сервиса
-//понятия не имею для чего нужно было это разделение дающее независимость
-export default ItemList;
+  });
+
+  return (
+    <ul className="item-list list-group">
+      {items}
+    </ul>
+  );
+};
+
+const { getAllPeople } = new SwapiService();
+
+export default withData(ItemList, getAllPeople);
